@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавление нового заказа</title>
+</head>
+<body>
+
+<h1>Редактировать заказ</h1>
+
+<form th:action="@{/orders/edit}" th:object="${order}" method="post">
+    <input type="hidden" th:field="*{id}">
+
+    <label>Имя:</label>
+    <input type="text" th:field="*{name}" />
+
+    <br/>
+
+    <br/>
+    <label>Адрес:</label>
+    <input type="text" th:field="*{deliveryAddress}" />
+
+    <br/>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+</body>
+</html>

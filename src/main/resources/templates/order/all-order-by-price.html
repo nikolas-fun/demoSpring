@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All orders</title>
+</head>
+<body>
+
+<h1>Product list</h1>
+
+<table border="1">
+    <tr>
+        <th>Имя</th>
+        <th>Цена</th>
+        <th>Уникальный код</th>
+        <th>Адрес</th>
+    </tr>
+
+    <tr th:each="ord : ${orders}">
+        <td th:text="${ord.getName()}"></td>
+        <td th:text="${ord.getPrice()}"></td>
+        <td th:text="${ord.getUniqueCode()}"></td>
+        <td th:text="${ord.getDeliveryAddress()}"></td>
+    </tr>
+</table>
+
+</body>
+
+
+</html>

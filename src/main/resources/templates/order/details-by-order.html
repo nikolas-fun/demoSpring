@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Price with Delivery Address</title>
+</head>
+<body>
+
+<h1>Информация о заказе</h1>
+
+<p>ID: <span th:text="${order.getId()}"></span></p>
+<p>Имя: <span th:text="${order.getName()}"></span></p>
+<p>Цена: <span th:text="${order.getPrice()}"></span></p>
+<p>Уникальный код: <span th:text="${order.getUniqueCode()}"></span></p>
+<p>Адрес: <span th:text="${order.getDeliveryAddress()}"></span></p>
+
+</body>
+</html>
