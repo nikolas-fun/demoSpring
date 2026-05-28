@@ -2,7 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.dto.mapper.OrderMapping;
 import com.example.demo.dto.request.UpdateOrderRequestDTO;
-import com.example.demo.dto.responce.UpdateOrderResponceDTO;
+import com.example.demo.dto.responce.UpdateOrderResponseDTO;
+import com.example.demo.dto.responce.OrdersResponseDTO;
 import com.example.demo.model.Order;
 import com.example.demo.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,11 @@ public class OrderService {
         return orderRepository.findById(id).get();
     }
 
-    public List<Order> findAll(){
-        return orderRepository.findAll();
+    public  List<OrdersResponseDTO> findAll(){
+        return orderRepository.findAll()
+                .stream()
+                .map(OrderMapping::mapToOrdersResponseDTO)
+                .toList();
     }
     public  Order findByName(String name){
         return orderRepository.findOrderByName(name);
@@ -52,7 +56,7 @@ public class OrderService {
         orderRepository.deleteOrderByUniqueCode(uniqueCode);
     }
 
-    public UpdateOrderResponceDTO findForUpdate(Long id){
+    public UpdateOrderResponseDTO findForUpdate(Long id){
         Order order = orderRepository.findById(id).get();
 
        return OrderMapping.mapToUpdateOrderResponcetDTO(order);

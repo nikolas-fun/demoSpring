@@ -1,7 +1,8 @@
 package com.example.demo.dto.mapper;
 
 import com.example.demo.dto.request.UpdateOrderRequestDTO;
-import com.example.demo.dto.responce.UpdateOrderResponceDTO;
+import com.example.demo.dto.responce.OrdersResponseDTO;
+import com.example.demo.dto.responce.UpdateOrderResponseDTO;
 import com.example.demo.model.Order;
 
 public class OrderMapping {
@@ -15,13 +16,23 @@ public class OrderMapping {
         return order;
     }
 
-    public static UpdateOrderResponceDTO mapToUpdateOrderResponcetDTO(Order order){
+    public static UpdateOrderResponseDTO mapToUpdateOrderResponcetDTO(Order order){
 
-        UpdateOrderResponceDTO dto = new UpdateOrderResponceDTO();
+        UpdateOrderResponseDTO dto = new UpdateOrderResponseDTO();
         dto.setId(order.getId());
         dto.setName(order.getName());
         dto.setDeliveryAddress(order.getDeliveryAddress());
 
         return dto;
     }
+    public  static OrdersResponseDTO mapToOrdersResponseDTO(Order order){
+        OrdersResponseDTO dto = new OrdersResponseDTO();
+        dto.setId(order.getId());
+        dto.setName(order.getName());
+        dto.setPrice(order.getPrice());
+
+        return dto;
+    }
+
+
 }

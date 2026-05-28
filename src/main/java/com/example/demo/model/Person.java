@@ -4,23 +4,34 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.FetchProfile;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    private Long id;
 
-    public String name;
-    public int age;
+    private String name;
+    private int age;
+    private String password;
+    private String login;
+    private String email;
+
+    @CreationTimestamp
+    LocalDateTime createdAt;
+
 }
 
 

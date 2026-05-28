@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.dto.request.UpdateOrderRequestDTO;
-import com.example.demo.dto.responce.UpdateOrderResponceDTO;
+import com.example.demo.dto.responce.UpdateOrderResponseDTO;
 import com.example.demo.model.Order;
 import com.example.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,12 @@ public class OrderController {
     @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
+    }
+
+
+    @GetMapping()
+    public String menu() {
+        return "order/orders";
     }
 
     @GetMapping("/name/{name}")
@@ -45,6 +51,7 @@ public class OrderController {
     @GetMapping("/all")
     public String getAll(Model model) {
         model.addAttribute("orders", orderService.findAll());
+
         return "order/all";
     }
 
@@ -57,7 +64,7 @@ public class OrderController {
     @PostMapping("/save")
     public String save(@ModelAttribute Order order) {
         orderService.save(order);
-        return "redirect:/orders/all ";
+        return "redirect:/orders/all";
     }
 
     @PostMapping("/delete/{id}")
@@ -66,7 +73,7 @@ public class OrderController {
 
         return "redirect:/orders/all";
     }
-    @PostMapping("delete/{uniqueCode}")
+    @PostMapping("delete/code/{uniqueCode}")
     public String deleteOrderByUniqueCode(@PathVariable String uniqueCode){
         orderService.deleteOrderByUniqueCode(uniqueCode);
 
@@ -77,7 +84,7 @@ public class OrderController {
     @GetMapping("/{id}/edit-form")
     public String editPage(@PathVariable Long id, Model model){
 
-        UpdateOrderResponceDTO order = orderService.findForUpdate(id);
+        UpdateOrderResponseDTO order = orderService.findForUpdate(id);
 
         model.addAttribute("order", order);
 
@@ -107,4 +114,5 @@ public class OrderController {
         return "redirect:/orders/all";
 
     }
+   
 }

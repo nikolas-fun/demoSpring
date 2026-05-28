@@ -23,7 +23,7 @@ public class PersonController {
     }
 
     @GetMapping("/get/{id}")// http://localhost:8080/person/get/1
-    public String findById(@PathVariable Integer id, Model model){
+    public String findById(@PathVariable Long id, Model model){
         Person person = personService.findById(id);
         model.addAttribute("person", person);
 
