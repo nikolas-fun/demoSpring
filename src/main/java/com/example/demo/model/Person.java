@@ -25,8 +25,9 @@ public class Person {
 
     private String name;
     private int age;
+
     private String password;
-    private String login;
+    private String nickName;
     private String email;
 
     @CreationTimestamp

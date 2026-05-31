@@ -21,12 +21,6 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-
-    @GetMapping()
-    public String menu() {
-        return "order/orders";
-    }
-
     @GetMapping("/name/{name}")
     public String getByName(@PathVariable String name, Model model) {
         model.addAttribute("order", orderService.findByName(name));
@@ -108,6 +102,7 @@ public class OrderController {
 
         return "order/edit-name-and-price";
     }
+
     @PostMapping("/edit2")
     public  String edit2(@ModelAttribute Order order){
         orderService.updateNameAndPrice(order);

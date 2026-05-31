@@ -20,7 +20,7 @@ public class CalculationController {
     @GetMapping("/calculator")
     public String showCalculatorPage(Model model) {
         model.addAttribute("calculation", new Calculation());
-        return "calculator";
+        return "calculation/calculator";
     }
 
     @PostMapping("/calculate")
@@ -33,7 +33,7 @@ public class CalculationController {
             model.addAttribute("error", runtimeException.getMessage());
         }
 
-        return "calculator";
+        return "calculation/calculator";
     }
 
     @GetMapping("/history")
@@ -41,6 +41,6 @@ public class CalculationController {
 
         model.addAttribute("calculations", calculatorService.getAll());// select * from calculator
 
-        return "history";
+        return "calculation/history";
     }
 }

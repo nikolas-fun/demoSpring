@@ -10,13 +10,23 @@
 <form th:action="@{/person/save}" th:object="${person}" method="post">
     <label>Имя:</label>
     <input type="text" th:field="*{name}" />
-
-    <br/>
+    <br>
 
     <label>Возраст:</label>
     <input type="number" th:field="*{age}" />
+    <br>
 
-    <br/>
+    <label>Логин:</label>
+    <input type="text" th:field="*{nickName}" />
+    <br>
+
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" />
+    <br>
+
+    <label>Пароль:</label>
+    <input type="password" th:field="*{password}" />
+    <br>
 
     <button type="submit">Сохранить</button>
 </form>
