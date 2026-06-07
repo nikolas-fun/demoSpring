@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search by age</title>
+</head>
+<body>
+
+<h1>Поиск "ПО ВОЗРАСТУ"</h1>
+
+<form th:action="@{/person/get/{age}}" th:object="${person}" method="get">
+
+    <label>Введи возраст:</label>
+
+    <input type="number" name="age">
+
+    <button type="submit">Search</button>
+
+</form>
+
+</body>
+</html>

@@ -1,7 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.request.PersonCreateRequestDTO;
+import com.example.demo.dto.request.PersonUpdateLoginAndPasswordRequestDTO;
+import com.example.demo.dto.request.PersonUpdateNameAndAgeRequestDTO;
+import com.example.demo.dto.responce.PersonAgeResponseDTO;
 import com.example.demo.dto.responce.PersonDetailsResponseDTO;
+import com.example.demo.dto.responce.PersonUpdateNameAndAgeResponseDTO;
+import com.example.demo.model.Order;
 import com.example.demo.model.Person;
 import com.example.demo.repository.PersonRepository;
 import com.example.demo.service.PersonService;
@@ -27,11 +32,17 @@ public class PersonController {
     @GetMapping("/get/{id}")// http://localhost:8080/person/get/1
     public String findById(@PathVariable Long id, Model model) {
 
-        PersonDetailsResponseDTO dto = personService.findById(id);
-
-        model.addAttribute("person", dto);
+        model.addAttribute("person", personService.findById(id));
 
         return "/person/person-details";
+    }
+
+    @GetMapping("/get")
+    public String findByAge(@RequestParam(required = false) Integer age, Model model) {
+
+        model.addAttribute("person", personService.findByAge(age));
+
+        return "/person/person-details-age";
     }
 
     @GetMapping("/register")
@@ -68,9 +79,37 @@ public class PersonController {
 
         return "/person/edit";
     }*/
-    @PostMapping("/editNameAndPage")
+   /* @PostMapping("/editNameAndPage")
     public String editNameAndPage(@ModelAttribute Person person) {
         personService.updateNameAndAge(person);
         return "redirect:/person/show-all";
+    }*/
+
+    @GetMapping("/person/{id}")
+    public String updateNameAndAge(@PathVariable Long id, Model model) {
+        PersonDetailsResponseDTO person = personService.findById(id);
+        model.addAttribute("person", person);
+
+        return "person/edit-name-and-age";
     }
+
+
+    @GetMapping("/password-login/{id}")
+    public String pagePasswordTo(@PathVariable Long id, Model model) {
+        PersonUpdateLoginAndPasswordRequestDTO dto =  new PersonUpdateLoginAndPasswordRequestDTO();
+        dto.setId(id);
+
+        model.addAttribute("dto", dto);
+
+        return "/person/edit-password-login";
+    }
+
+    @PostMapping("/edit/password-login")
+    public String editPasswordAndLogin(@ModelAttribute PersonUpdateLoginAndPasswordRequestDTO dto) {
+
+        personService.updateLoginAndPassword(dto);
+
+        return "redirect:/person/show-all";
+    }
+
 }

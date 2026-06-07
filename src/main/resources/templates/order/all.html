@@ -38,8 +38,13 @@
                     <tbody>
                     <tr th:each="ord : ${orders}">
 
-                        <td th:text="${ord.getName()}"></td>
+                        <td>
+                            <a th:href="@{/orders/name/{name}(name=${ord.getName()})}">
+                                <span th:text="${ord.getName()}"></span>
+                            </a>
+                        </td>
                         <td th:text="${ord.getPrice()}"></td>
+
 
                         <td>
                             <form th:action="@{/orders/delete/{id}(id=${ord.getId()})}" method="post">

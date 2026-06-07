@@ -16,5 +16,9 @@ public class Order {
     private double price;
     private String uniqueCode;
     private String deliveryAddress;
+
+    @OneToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
 }
 

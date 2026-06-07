@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.mapper.OrderMapping;
 import com.example.demo.dto.request.UpdateOrderRequestDTO;
+import com.example.demo.dto.responce.OrderDetailsResponseDTO;
 import com.example.demo.dto.responce.UpdateOrderResponseDTO;
 import com.example.demo.dto.responce.OrdersResponseDTO;
 import com.example.demo.model.Order;
@@ -32,8 +33,10 @@ public class OrderService {
                 .map(OrderMapping::mapToOrdersResponseDTO)
                 .toList();
     }
-    public  Order findByName(String name){
-        return orderRepository.findOrderByName(name);
+    public OrderDetailsResponseDTO findByName(String name){
+       Order order = orderRepository.findOrderByName(name);
+
+       return OrderMapping.mapToOrderDetailsResponseDTO(order);
     }
     public List<Order> findByPrice(double price){
         return orderRepository.findExpensiveOrder(price);

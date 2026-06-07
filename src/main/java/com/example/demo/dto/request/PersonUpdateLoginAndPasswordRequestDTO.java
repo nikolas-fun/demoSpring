@@ -3,9 +3,9 @@ package com.example.demo.dto.request;
 import lombok.Data;
 
 @Data
-public class UpdatePersonRequestDTO {
+public class PersonUpdateLoginAndPasswordRequestDTO {
     private Long id;
 
-    private String password;
     private String nickName;
+    private String password;
 }

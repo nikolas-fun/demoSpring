@@ -2,13 +2,17 @@ package com.example.demo.service;
 
 import com.example.demo.dto.mapper.PersonMapping;
 import com.example.demo.dto.request.PersonCreateRequestDTO;
+import com.example.demo.dto.request.PersonUpdateLoginAndPasswordRequestDTO;
+import com.example.demo.dto.request.PersonUpdateNameAndAgeRequestDTO;
 import com.example.demo.dto.request.UpdatePersonRequestDTO;
+import com.example.demo.dto.responce.PersonAgeResponseDTO;
 import com.example.demo.dto.responce.PersonDetailsResponseDTO;
 import com.example.demo.model.Person;
-import com.example.demo.repository.CalculationRepository;
 import com.example.demo.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static com.example.demo.dto.mapper.PersonMapping.mapToUpdateLoginAndPassword;
 
 @Service
 public class PersonService {
@@ -20,6 +24,11 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
+    public PersonAgeResponseDTO findByAge(int age){
+        Person person = personRepository.findPersonByAge(age);
+
+        return PersonMapping.mapToPersonAgeResponseDTO(person);
+    }
 
     public PersonDetailsResponseDTO findById(Long id) {
         Person person = personRepository.findById(id).get();
@@ -32,6 +41,8 @@ public class PersonService {
 
         personRepository.save(person);
     }
+    // сделай проверку существует ли пользователь с мылом в базе данных,
+    // если нет то пропускай на регистрацию если нет отображай исключение на странице
 
     /*
      * Вызови метод findById в контроллере и измени шаблон
@@ -41,31 +52,29 @@ public class PersonService {
      *
      * Для всех методов реализуй правильный функционал в контроллере и шаблонах
      *
-     *
-     * По итогу, добавь новый функционал на стартовое меню с кнопочками
-     * 1. Работа с DTO
 
-	1.1 Создай кастомный метод который будет искать пользователей по возрасту
-	1.2 Для этого метода создай дто в которой будет три поля (id,name, nickName)
-	1.3 Сделай правильный маппинг для этой дто
-	1.4 Вызови метод в сервисе и в контроллере и не забудь про шаблон
-
-	1.5 Создай новую сущность Product с полями (id, name, price, count, index)
-	1.6 Создай базовый репозиторий для сущности Product и сервисный класс, а также контроллер
 	*/
-    public void updateLoginAndPassword(UpdatePersonRequestDTO dto) {
+    public void updateLoginAndPassword(PersonUpdateLoginAndPasswordRequestDTO dto) {
         Person updatePerson = personRepository.findById(dto.getId()).get();
-        PersonMapping.mapToUpdatePersonRequestDTO(updatePerson, dto);
-        personRepository.save(updatePerson);
-    }
 
-    public Person updateNameAndAge(Person person) {
+        String oldPassword = updatePerson.getPassword();
+        String newPassword = dto.getPassword();
 
-        Person updatePerson = personRepository.findById(person.getId()).get();
+        if(personRepository.existsPersonByNickName(dto.getNickName())){
+            throw new RuntimeException("Nick already exists");
+        }
+        else if(oldPassword.equals(newPassword)){
+            throw new RuntimeException("New password must be different from old password");
+        }
 
-        updatePerson.setName(person.getName());
-        updatePerson.setAge(person.getAge());
+        else{
+            personRepository.save(mapToUpdateLoginAndPassword(updatePerson,dto));
+        }
+    }// передай правильно на фронтенд исключения через модель
 
-        return personRepository.save(person);
-    }
+   /* public Person updateNameAndAge(PersonUpdateNameAndAgeRequestDTO dto) {
+        String
+
+
+    }*/
 }

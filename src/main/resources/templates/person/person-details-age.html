@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Person AGE</title>
+</head>
+<body>
+
+<form th:action="@{/person/get}" method="get">
+    <input type="number"
+           name="age"
+    placeholder="Enter age">
+    <button type="submit"> Search </button>
+</form>
+
+<h1>Информация о человеке ПО ВОЗРАСТУ</h1>
+
+<div th:if="${person !=null}">
+<p>ID: <span th:text="${person.id}"></span></p>
+<p>Имя: <span th:text="${person.name}"></span></p>
+<p>Nick: <span th:text="${person.nickName}"></span></p>
+</div>
+
+</body>
+</html>
