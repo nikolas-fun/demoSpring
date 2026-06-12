@@ -3,8 +3,12 @@ package com.example.demo.dto.mapper;
 import com.example.demo.dto.request.UpdateOrderRequestDTO;
 import com.example.demo.dto.responce.OrderDetailsResponseDTO;
 import com.example.demo.dto.responce.OrdersResponseDTO;
+import com.example.demo.dto.responce.ProductResponseDTO;
 import com.example.demo.dto.responce.UpdateOrderResponseDTO;
 import com.example.demo.model.Order;
+import com.example.demo.model.Product;
+
+import java.util.List;
 
 public class OrderMapping {
 
@@ -43,8 +47,12 @@ public class OrderMapping {
         dto.setUniqueCode(order.getUniqueCode());
         dto.setDeliveryAddress(order.getDeliveryAddress());
 
-        dto.setProductName(order.getProduct().getName());
-        dto.setIndex(order.getProduct().getIndex());
+        List<ProductResponseDTO> dtoProducts = order.getProducts()
+                .stream()
+                .map(ProductMapping::mapToProductResponseDTO)
+                .toList();
+
+        dto.setProductDto(dtoProducts);
 
         return dto;
     }

@@ -3,6 +3,8 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -17,8 +19,8 @@ public class Order {
     private String uniqueCode;
     private String deliveryAddress;
 
-    @OneToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product product;
+    @OneToMany
+    @JoinColumn(name = "order_id")
+    private List<Product> products;
 }
 

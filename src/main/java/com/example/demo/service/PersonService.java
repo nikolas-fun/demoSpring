@@ -39,7 +39,11 @@ public class PersonService {
     public void save(PersonCreateRequestDTO dto) {
         Person person = PersonMapping.mapToPerson(dto);
 
-        personRepository.save(person);
+        if (personRepository.existsPersonByEmail(dto.getEmail())) {
+            throw new RuntimeException("User with this email already exists");
+        }
+        else {
+        personRepository.save(person);}
     }
     // сделай проверку существует ли пользователь с мылом в базе данных,
     // если нет то пропускай на регистрацию если нет отображай исключение на странице
@@ -73,8 +77,9 @@ public class PersonService {
     }// передай правильно на фронтенд исключения через модель
 
    /* public Person updateNameAndAge(PersonUpdateNameAndAgeRequestDTO dto) {
-        String
+        Person updatePerson = personRepository.findById(dto.getId()).get();
 
 
-    }*/
+
+*/
 }

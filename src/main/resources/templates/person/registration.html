@@ -31,5 +31,9 @@
     <button type="submit">Сохранить</button>
 </form>
 
+
+<p th:if="${error != null}">
+    Ошибка: <span th:text="${error}"></span>
+</p>
 </body>
 </html>

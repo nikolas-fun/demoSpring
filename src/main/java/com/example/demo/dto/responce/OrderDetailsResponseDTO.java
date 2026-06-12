@@ -2,6 +2,8 @@ package com.example.demo.dto.responce;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class OrderDetailsResponseDTO {
 
@@ -11,7 +13,7 @@ public class OrderDetailsResponseDTO {
     private String uniqueCode;
     private String deliveryAddress;
 
-    private String productName;
-    private String index;
+    private List<ProductResponseDTO> productDto;
+
 
 }

@@ -53,8 +53,15 @@ public class PersonController {
     }
 
     @PostMapping("/save")
-    public String saveToDB(@ModelAttribute PersonCreateRequestDTO dto) {
-        personService.save(dto);
+    public String saveToDB(@ModelAttribute PersonCreateRequestDTO dto, Model model) {
+        try {
+            personService.save(dto);
+
+            return "redirect:/person/show-all";
+
+        } catch (RuntimeException runtimeException) {
+            model.addAttribute("error", runtimeException.getMessage());
+        }
 
         return "redirect:/person/show-all";
     }
@@ -96,7 +103,7 @@ public class PersonController {
 
     @GetMapping("/password-login/{id}")
     public String pagePasswordTo(@PathVariable Long id, Model model) {
-        PersonUpdateLoginAndPasswordRequestDTO dto =  new PersonUpdateLoginAndPasswordRequestDTO();
+        PersonUpdateLoginAndPasswordRequestDTO dto = new PersonUpdateLoginAndPasswordRequestDTO();
         dto.setId(id);
 
         model.addAttribute("dto", dto);

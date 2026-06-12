@@ -32,7 +32,6 @@ public class CalculatorService {
             case "/":
                 if (calculation.getNumber2() == 0) {
                     throw new RuntimeException("На ноль делить нельзя");
-
                 }
                 result = calculation.getNumber1() / calculation.getNumber2();
                 break;

@@ -12,9 +12,24 @@
 <p>Цена: <span th:text="${order.getPrice()}"></span></p>
 <p>Уникальный код: <span th:text="${order.getUniqueCode()}"></span></p>
 <p>Адрес: <span th:text="${order.getDeliveryAddress()}"></span></p>
+
 <hr>
-<p>Название товара: <span th:text="${order.getProductName()}"></span></p>
-<p>Артикль: <span th:text="${order.getIndex()}"></span></p>
+
+<div th:each="product : ${order.getProductDto()}">
+
+    <p>
+        Название товара:
+        <span th:text="${product.getProductName()}"></span>
+    </p>
+
+    <p>
+        Артикль:
+        <span th:text="${product.getIndex()}"></span>
+    </p>
+
+    <hr>
+
+</div>
 
 </body>
 </html>

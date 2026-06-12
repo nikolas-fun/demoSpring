@@ -33,6 +33,7 @@ public class OrderService {
                 .map(OrderMapping::mapToOrdersResponseDTO)
                 .toList();
     }
+    
     public OrderDetailsResponseDTO findByName(String name){
        Order order = orderRepository.findOrderByName(name);
 
@@ -65,7 +66,6 @@ public class OrderService {
        return OrderMapping.mapToUpdateOrderResponcetDTO(order);
 
     }
-
 
     public void update(UpdateOrderRequestDTO dto){
         Order updatedOrder = orderRepository.findById(dto.getId()).get();
