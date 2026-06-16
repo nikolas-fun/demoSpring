@@ -4,11 +4,11 @@ import com.example.demo.dto.request.PersonCreateRequestDTO;
 import com.example.demo.dto.request.PersonUpdateLoginAndPasswordRequestDTO;
 import com.example.demo.dto.request.PersonUpdateNameAndAgeRequestDTO;
 import com.example.demo.dto.request.UpdatePersonRequestDTO;
-import com.example.demo.dto.responce.PersonAgeResponseDTO;
-import com.example.demo.dto.responce.PersonDetailsResponseDTO;
-import com.example.demo.dto.responce.PersonUpdateLoginAndPasswordResponseDTO;
-import com.example.demo.dto.responce.PersonUpdateNameAndAgeResponseDTO;
+import com.example.demo.dto.responce.*;
+import com.example.demo.model.DeliveryAddress;
 import com.example.demo.model.Person;
+
+import java.util.List;
 
 public class PersonMapping {
     public static PersonDetailsResponseDTO mapToPersonDetailsResponseDTO(Person person) {
@@ -17,6 +17,24 @@ public class PersonMapping {
         dto.setName(person.getName());
         dto.setNickName(person.getNickName());
         dto.setAge(person.getAge());
+
+        return dto;
+    }
+
+    public static PersonInfoResponseDTO mapToPersonInfoResponseDTO(Person person) {
+
+        PersonInfoResponseDTO dto = new PersonInfoResponseDTO();
+
+        dto.setId(person.getId());
+        dto.setName(person.getName());
+        dto.setAge(person.getAge());
+
+        List<OrderInfoResponseDTO> dtoOrders = person.getOrders()
+                .stream()
+                .map(OrderMapping::mapToOrderInfoResponseDTO)
+                .toList();
+
+        dto.setOrders(dtoOrders);
 
         return dto;
     }
@@ -49,6 +67,8 @@ public class PersonMapping {
         person.setPassword(dto.getPassword());
         person.setEmail(dto.getEmail());
 
+        DeliveryAddress deliveryAddress = DeliveryAddressMapping.mapToDeliveryAddress(dto.getDeliveryAddressCreateRequestDTO());
+        person.setDeliveryAddress(deliveryAddress);
         return person;
     }
 

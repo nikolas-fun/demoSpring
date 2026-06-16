@@ -1,10 +1,7 @@
 package com.example.demo.dto.mapper;
 
 import com.example.demo.dto.request.UpdateOrderRequestDTO;
-import com.example.demo.dto.responce.OrderDetailsResponseDTO;
-import com.example.demo.dto.responce.OrdersResponseDTO;
-import com.example.demo.dto.responce.ProductResponseDTO;
-import com.example.demo.dto.responce.UpdateOrderResponseDTO;
+import com.example.demo.dto.responce.*;
 import com.example.demo.model.Order;
 import com.example.demo.model.Product;
 
@@ -53,6 +50,22 @@ public class OrderMapping {
                 .toList();
 
         dto.setProductDto(dtoProducts);
+
+        return dto;
+    }
+
+    public  static OrderInfoResponseDTO mapToOrderInfoResponseDTO(Order order){
+        OrderInfoResponseDTO dto = new OrderInfoResponseDTO();
+        dto.setId(order.getId());
+        dto.setName(order.getName());
+        dto.setPrice(order.getPrice());
+
+        List<ProductInfoResponseDTO> dtoProducts = order.getProducts()
+                .stream()
+                .map(ProductMapping::mapToProductInfoResponseDTO)
+                .toList();
+
+        dto.setProducts(dtoProducts);
 
         return dto;
     }

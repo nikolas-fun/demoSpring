@@ -19,8 +19,11 @@ public class Order {
     private String uniqueCode;
     private String deliveryAddress;
 
-    @OneToMany
-    @JoinColumn(name = "order_id")
+    @ManyToMany
     private List<Product> products;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 }
 

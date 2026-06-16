@@ -37,7 +37,7 @@ public class PersonController {
         return "/person/person-details";
     }
 
-    @GetMapping("/get")
+    @GetMapping("/get/age/{age}")
     public String findByAge(@RequestParam(required = false) Integer age, Model model) {
 
         model.addAttribute("person", personService.findByAge(age));
@@ -92,13 +92,13 @@ public class PersonController {
         return "redirect:/person/show-all";
     }*/
 
-    @GetMapping("/person/{id}")
+  /*  @GetMapping("/person/{id}")
     public String updateNameAndAge(@PathVariable Long id, Model model) {
         PersonDetailsResponseDTO person = personService.findById(id);
         model.addAttribute("person", person);
 
         return "person/edit-name-and-age";
-    }
+    }*/
 
 
     @GetMapping("/password-login/{id}")

@@ -25,7 +25,27 @@
     <br>
 
     <label>Пароль:</label>
-    <input type="password" th:field="*{password}" />
+    <input type="text" th:field="*{password}" />
+    <br>
+
+    <label>Страна:</label>
+    <input type="text" th:field="*{deliveryAddressCreateRequestDTO.country}" />
+    <br>
+
+    <label>Город:</label>
+    <input type="text" th:field="*{deliveryAddressCreateRequestDTO.city}" />
+    <br>
+
+    <label>Улица:</label>
+    <input type="text" th:field="*{deliveryAddressCreateRequestDTO.street}" />
+    <br>
+
+    <label>Номер дома:</label>
+    <input type="text" th:field="*{deliveryAddressCreateRequestDTO.houseNumber}" />
+    <br>
+
+    <label>Комментарий:</label>
+    <input type="text" th:field="*{deliveryAddressCreateRequestDTO.comment}" />
     <br>
 
     <button type="submit">Сохранить</button>

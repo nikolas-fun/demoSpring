@@ -13,4 +13,5 @@ public class PersonCreateRequestDTO {
     private String nickName;
     private String email;
 
+    private DeliveryAddressCreateRequestDTO deliveryAddressCreateRequestDTO;
 }

@@ -7,12 +7,14 @@ import com.example.demo.dto.request.PersonUpdateNameAndAgeRequestDTO;
 import com.example.demo.dto.request.UpdatePersonRequestDTO;
 import com.example.demo.dto.responce.PersonAgeResponseDTO;
 import com.example.demo.dto.responce.PersonDetailsResponseDTO;
+import com.example.demo.dto.responce.PersonInfoResponseDTO;
 import com.example.demo.model.Person;
 import com.example.demo.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.example.demo.dto.mapper.PersonMapping.mapToUpdateLoginAndPassword;
+
 
 @Service
 public class PersonService {
@@ -30,10 +32,14 @@ public class PersonService {
         return PersonMapping.mapToPersonAgeResponseDTO(person);
     }
 
-    public PersonDetailsResponseDTO findById(Long id) {
+    public Person findPersonById(Long id){
+        return personRepository.findById(id).get();
+    }
+
+    public PersonInfoResponseDTO findById(Long id) {
         Person person = personRepository.findById(id).get();
 
-        return PersonMapping.mapToPersonDetailsResponseDTO(person);
+        return PersonMapping.mapToPersonInfoResponseDTO(person);
     }
 
     public void save(PersonCreateRequestDTO dto) {
@@ -53,6 +59,7 @@ public class PersonService {
      * Создай метод для сохранения нового пользователя, чтобы на форме были все поля кроме даты создания
      * Создай метод который будет обновлять только такие данные как (имя, возраст)
      * Создай метод который будет изменять только логин и пароль без всех остальных полей *
+
      *
      * Для всех методов реализуй правильный функционал в контроллере и шаблонах
      *

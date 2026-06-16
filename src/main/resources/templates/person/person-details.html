@@ -12,5 +12,37 @@
 <p>Nick: <span th:text="${person.nickName}"></span></p>
 <p>Возраст: <span th:text="${person.age}"></span></p>
 
+
+<h1>Информация о заказе</h1>
+
+<h1>Список заказов</h1>
+
+<div th:each="order : ${person.orders}">
+
+    <h2>
+        Заказ № <span th:text="${order.id}"></span>
+    </h2>
+    <h2>
+        Название № <span th:text="${order.getName()}"></span>
+    </h2>
+    <h2>
+        Сумма № <span th:text="${order.getPrice()}"></span>
+    </h2>
+
+
+    <h3>Товары:</h3>
+
+    <ul>
+        <li th:each="product : ${order.products}">
+            <span th:text="${product.name}"></span>
+            -
+            <span th:text="${product.index}"></span>
+        </li>
+    </ul>
+
+    <hr>
+
+</div>
+
 </body>
 </html>

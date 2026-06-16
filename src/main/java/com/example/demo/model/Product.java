@@ -1,11 +1,9 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ManyToAny;
 
 @Getter
 @Setter
@@ -19,5 +17,6 @@ public class Product {
     private double price;
     private int count;
     private String index;
+
 
 }

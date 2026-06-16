@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +8,7 @@ import org.hibernate.annotations.FetchProfile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -33,6 +31,12 @@ public class Person {
     @CreationTimestamp
     LocalDateTime createdAt;
 
+    @OneToMany(mappedBy = "person")
+    List<Order> orders;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    @JoinColumn(name = "delivery_address_id")
+    private DeliveryAddress deliveryAddress;
 }
 
 
